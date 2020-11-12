@@ -42,4 +42,11 @@ class CommandsController extends Controller
 
         return $commandModels;
     }
+    public function getAllCommandModelsAndDevicesByUser(string $username)
+    {
+        $cmService = new CommandService();
+        $commandModelsAndDevices = $cmService -> getAllCommandModelsAndDevicesByUser($username);
+
+        return $commandModelsAndDevices;
+    }
 }

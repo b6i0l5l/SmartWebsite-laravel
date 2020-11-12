@@ -41,6 +41,13 @@ class CommandService extends CommandRepository
 
         return $commandModels;
     }
+    public function getAllCommandModelsAndDevicesByUser(string $username)
+    {
+        $cmRepository = new CommandRepository();
+        $commandModelsAndDevices = $cmRepository -> getAllCommandModelsAndDevicesByUser($username);
+
+        return $commandModelsAndDevices;
+    }
 }
 
 ?>

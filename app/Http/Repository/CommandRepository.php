@@ -55,5 +55,26 @@ class CommandRepository
         
         return $commandModelsToArray;
     }
+    protected function getAllCommandModelsAndDevicesByUser(string $username)
+    {
+        $parameterKeys = ['command', 'device'];
+
+        $commandModelsAndDevices = CommandModels::select($parameterKeys)
+        ->where('username', $username)
+        ->get();
+    
+        return $this->commandModelsAndDevicesToArray($commandModelsAndDevices);
+    }
+    private function commandModelsAndDevicesToArray($commandModelsAndDevices)
+    {
+        $commandModelsAndDevicesToArray = [];
+        foreach($commandModelsAndDevices as $commandModelAndDevice)
+        {
+            array_push($commandModelsAndDevicesToArray, ['command'=>$commandModelAndDevice['command'],
+                    'device' => $commandModelAndDevice['device']]);
+        }
+
+        return $commandModelsAndDevicesToArray;
+    }
 }
 ?>
