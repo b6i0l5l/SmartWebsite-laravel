@@ -49,4 +49,11 @@ class CommandsController extends Controller
 
         return $commandModelsAndDevices;
     }
+    public function getIftttTriggerByDevice($device)
+    {
+        $cmService = new CommandService();
+        $status = $cmService -> getIftttTriggerByDevice($device);
+
+        return $status;
+    }
 }

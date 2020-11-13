@@ -48,6 +48,13 @@ class CommandService extends CommandRepository
 
         return $commandModelsAndDevices;
     }
+    public function getIftttTriggerByDevice($device)
+    {
+        $cmRepository = new CommandRepository();
+        $status = $cmRepository -> getIftttTriggerByDevice($device);
+
+        return $status;
+    }
 }
 
 ?>

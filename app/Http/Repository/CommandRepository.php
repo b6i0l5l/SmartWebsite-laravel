@@ -19,7 +19,7 @@ class CommandRepository
     }
     protected function getCommand(Request $request, string $device)
     {
-        $commandmodel = CommandModels::where([['username',$request['username']],['device', $device]])->first();
+        $commandmodel = CommandModels::where([['username', $request['username']],['device', $device]])->first();
         return $commandmodel->toArray();
     }
     protected function updateCommandModelByIdAndDevice(Request $request)
@@ -64,6 +64,10 @@ class CommandRepository
         ->get();
     
         return $this->commandModelsAndDevicesToArray($commandModelsAndDevices);
+    }
+    protected function getIftttTriggerByDevice($device)
+    {
+        return ['status' =>'ooooooooooooooooook'];
     }
     private function commandModelsAndDevicesToArray($commandModelsAndDevices)
     {
