@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ifttt' => [
+        'url' => env('IFTTT_URL'),
+        'key' => env('IFTTT_ACCESS_KEY'),
+    ],
+
 ];

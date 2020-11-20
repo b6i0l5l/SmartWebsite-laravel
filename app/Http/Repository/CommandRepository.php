@@ -2,6 +2,7 @@
 namespace App\Http\Repository;
 
 use Illuminate\Http\Request;
+use Config;
 use App\Models\CommandModels;
 
 class CommandRepository
@@ -67,7 +68,7 @@ class CommandRepository
     }
     protected function getIftttTriggerByDevice($action)
     {
-        $curl = curl_init("https://maker.ifttt.com/trigger/".$action."/with/key/kVOo6YluNonG0f7BVJqa8tNmk3b-QldtTtYSze2nwlY");
+        $curl = curl_init(Config::get('services.ifttt.url').$action."/with/key/".Config::get('services.ifttt.key'));
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_exec($curl);
         
