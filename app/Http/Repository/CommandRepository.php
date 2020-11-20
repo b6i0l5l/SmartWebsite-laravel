@@ -11,28 +11,28 @@ class CommandRepository
 
         $commandmodel = new CommandModels;
         $commandmodel->id = $request->id;
-        $commandmodel->device = $request->device;
+        $commandmodel->action = $request->action;
         $commandmodel->command = $request->command;
 
         $commandmodel -> save();
         return response()->json($commandmodel);
     }
-    protected function getCommand(Request $request, string $device)
+    protected function getCommand(Request $request, string $action)
     {
-        $commandmodel = CommandModels::where([['username', $request['username']],['device', $device]])->first();
+        $commandmodel = CommandModels::where([['username', $request['username']],['action', $action]])->first();
         return $commandmodel->toArray();
     }
     protected function updateCommandModelByIdAndDevice(Request $request)
     {
-        $commandmodel = CommandModels::where('device',$request->device)
+        $commandmodel = CommandModels::where('action',$request->action)
         ->update(['command' => $request->command]);
 
         return $commandmodel;
     }
-    protected function getCommandModelByUsernameAndDevice(Request $request, string $device)
+    protected function getCommandModelByUsernameAndDevice(Request $request, string $action)
     {
         if($request->has('username')){
-            $commandByUsernameAndDevice = CommandModels::where('device', $device)
+            $commandByUsernameAndDevice = CommandModels::where('action', $action)
             ->where('username', $request['username'])
             ->get();
             
@@ -57,7 +57,7 @@ class CommandRepository
     }
     protected function getAllCommandModelsAndDevicesByUser(string $username)
     {
-        $parameterKeys = ['command', 'device'];
+        $parameterKeys = ['command', 'action', 'device'];
 
         $commandModelsAndDevices = CommandModels::select($parameterKeys)
         ->where('username', $username)
@@ -65,8 +65,12 @@ class CommandRepository
     
         return $this->commandModelsAndDevicesToArray($commandModelsAndDevices);
     }
-    protected function getIftttTriggerByDevice($device)
+    protected function getIftttTriggerByDevice($action)
     {
+        $curl = curl_init("https://maker.ifttt.com/trigger/".$action."/with/key/kVOo6YluNonG0f7BVJqa8tNmk3b-QldtTtYSze2nwlY");
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_exec($curl);
+        
         return ['status' =>'ooooooooooooooooook'];
     }
     private function commandModelsAndDevicesToArray($commandModelsAndDevices)
@@ -74,8 +78,8 @@ class CommandRepository
         $commandModelsAndDevicesToArray = [];
         foreach($commandModelsAndDevices as $commandModelAndDevice)
         {
-            array_push($commandModelsAndDevicesToArray, ['command'=>$commandModelAndDevice['command'],
-                    'device' => $commandModelAndDevice['device']]);
+            array_push($commandModelsAndDevicesToArray, ['command' => $commandModelAndDevice['command'],
+                    'action' => $commandModelAndDevice['action'], 'device' => $commandModelAndDevice['device']]);
         }
 
         return $commandModelsAndDevicesToArray;
