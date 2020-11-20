@@ -19,10 +19,10 @@ class UserRepository
     {
         $user = UserModels::where([['username', $request['username']], ['password', $request['password']]])->first();
         if($user == null){
-            return response()->json(['success'=>false, 'message' => 'Login Fail, please check your username & password']);
+            return response()->json(['status'=>false, 'message' => 'Login Fail, please check your username & password']);
         };
 
-        return response()->json(['success'=>true, 'message' => 'success', 'username'=>$request->username]);
+        return response()->json(['status'=>true, 'message' => 'success', 'username'=>$request->username]);
     }
 
 }

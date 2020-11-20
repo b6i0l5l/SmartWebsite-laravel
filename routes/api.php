@@ -19,11 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/language','App\Http\Controllers\LanguagesController@getLanguages');
-Route::get('/getcommand/{device}','App\Http\Controllers\CommandsController@getCommand');
+Route::get('/getcommand/{action}','App\Http\Controllers\CommandsController@getCommand');
 Route::get('/getallcommands/{username}','App\Http\Controllers\CommandsController@getAllCommandsByUser');
 Route::get('/getdevicesinfos/{username}','App\Http\Controllers\CommandsController@getAllCommandModelsAndDevicesByUser');
-Route::get('/gettrigger/{device}','App\Http\Controllers\CommandsController@getIftttTriggerByDevice');
-Route::get('/getusercommand/{device}','App\Http\Controllers\CommandsController@deviceCommand');
+Route::get('/gettrigger/{action}','App\Http\Controllers\CommandsController@getIftttTriggerByDevice');
+Route::get('/getusercommand/{action}','App\Http\Controllers\CommandsController@deviceCommand');
 Route::get('check/useraccount','App\Http\Controllers\UsersController@checkUsernamePassword');
 Route::post('/postcommand','App\Http\Controllers\CommandsController@postCommand');
 Route::post('/postnewuser','App\Http\Controllers\UsersController@postNewUsernamePassword');

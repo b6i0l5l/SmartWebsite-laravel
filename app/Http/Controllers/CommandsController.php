@@ -14,10 +14,10 @@ class CommandsController extends Controller
 
         return $cmLine;
     }
-    public function getCommand(Request $request, string $device)
+    public function getCommand(Request $request, string $action)
     {
         $cmService = new CommandService();
-        $cmLine = $cmService -> getCommandByDevice($request, $device);
+        $cmLine = $cmService -> getCommandByDevice($request, $action);
 
         return $cmLine;
     }
@@ -28,10 +28,10 @@ class CommandsController extends Controller
 
         return $cmLine;
     }
-    public function deviceCommand(Request $request, string $device)
+    public function deviceCommand(Request $request, string $action)
     {
         $cmService = new CommandService();
-        $cmLine = $cmService -> getCommandByUsernameAndDevice($request, $device);
+        $cmLine = $cmService -> getCommandByUsernameAndDevice($request, $action);
 
         return $cmLine;
     }
@@ -49,10 +49,10 @@ class CommandsController extends Controller
 
         return $commandModelsAndDevices;
     }
-    public function getIftttTriggerByDevice($device)
+    public function getIftttTriggerByDevice($action)
     {
         $cmService = new CommandService();
-        $status = $cmService -> getIftttTriggerByDevice($device);
+        $status = $cmService -> getIftttTriggerByDevice($action);
 
         return $status;
     }

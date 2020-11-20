@@ -13,10 +13,10 @@ class CommandService extends CommandRepository
 
         return $cmLine;
     }
-    public function getCommandByDevice(Request $request, string $device)
+    public function getCommandByDevice(Request $request, string $action)
     {
         $cmRepository = new CommandRepository();
-        $cmLine = $cmRepository -> getCommand($request, $device);
+        $cmLine = $cmRepository -> getCommand($request, $action);
 
         return $cmLine;
     }
@@ -27,10 +27,10 @@ class CommandService extends CommandRepository
 
         return $cmLine;
     }
-    public function getCommandByUsernameAndDevice(Request $request, string $device)
+    public function getCommandByUsernameAndDevice(Request $request, string $action)
     {
         $cmRepository = new CommandRepository();
-        $cmLine = $cmRepository -> getCommandModelByUsernameAndDevice($request, $device);
+        $cmLine = $cmRepository -> getCommandModelByUsernameAndDevice($request, $action);
 
         return $cmLine;
     }
@@ -48,10 +48,10 @@ class CommandService extends CommandRepository
 
         return $commandModelsAndDevices;
     }
-    public function getIftttTriggerByDevice($device)
+    public function getIftttTriggerByDevice($action)
     {
         $cmRepository = new CommandRepository();
-        $status = $cmRepository -> getIftttTriggerByDevice($device);
+        $status = $cmRepository -> getIftttTriggerByDevice($action);
 
         return $status;
     }
