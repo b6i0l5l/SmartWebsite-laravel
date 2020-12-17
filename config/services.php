@@ -32,7 +32,8 @@ return [
 
     'ifttt' => [
         'url' => env('IFTTT_URL'),
-        'key' => env('IFTTT_ACCESS_KEY'),
+        'key_1' => env('IFTTT_ACCESS_KEY_1'),
+        'key_2' => env('IFTTT_ACCESS_KEY_2'),
     ],
 
 ];

@@ -68,9 +68,12 @@ class CommandRepository
     }
     protected function getIftttTriggerByDevice($action)
     {
-        $curl = curl_init(Config::get('services.ifttt.url').$action."/with/key/".Config::get('services.ifttt.key'));
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_exec($curl);
+        
+        $curl_1 = curl_init(Config::get('services.ifttt.url').$action."/with/key/".Config::get('services.ifttt.key_1'));
+        $curl_2 = curl_init(Config::get('services.ifttt.url').$action."/with/key/".Config::get('services.ifttt.key_2'));
+        // curl_setopt($curl, CURLOPT_POST, 1);
+        curl_exec($curl_1);
+        curl_exec($curl_2);
         
         return ['status' =>'ooooooooooooooooook'];
     }
