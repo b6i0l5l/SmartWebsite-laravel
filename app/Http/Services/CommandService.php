@@ -55,6 +55,13 @@ class CommandService extends CommandRepository
 
         return $status;
     }
+    public function getIftttTriggerByLevenshtein(request $request, $command)
+    {
+        $cmRepository = new CommandRepository();
+        $status = $cmRepository -> getIftttTriggerByLevenshtein($request, $command);
+
+        return $status;
+    }
 }
 
 ?>

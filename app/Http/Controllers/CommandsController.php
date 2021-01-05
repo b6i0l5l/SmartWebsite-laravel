@@ -56,4 +56,11 @@ class CommandsController extends Controller
 
         return $status;
     }
+    public function getIftttTriggerByLevenshtein(request $request, $command)
+    {
+        $cmService = new CommandService();
+        $status = $cmService -> getIftttTriggerByLevenshtein($request, $command);
+
+        return $status;
+    }
 }

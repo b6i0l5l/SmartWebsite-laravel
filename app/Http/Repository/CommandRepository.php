@@ -77,6 +77,33 @@ class CommandRepository
         
         return ['status' =>'ooooooooooooooooook'];
     }
+    protected function getIftttTriggerByLevenshtein(request $request, $command)
+    {
+        $commandModelsByUsername = CommandModels::select(['command', 'action'])
+        ->where('username', $request['username'])
+        ->get();
+       
+        return $this->levenshteinDistance($commandModelsByUsername, $command);
+    }
+    private function levenshteinDistance($commandModelsByUsername, $command)
+    {
+        $minLevenshteinDistance = levenshtein($commandModelsByUsername[0]['command'], $command);
+        $action = $commandModelsByUsername[0]['action'];
+        foreach($commandModelsByUsername as $commandModelByUsername)
+        {
+            if ($minLevenshteinDistance > levenshtein($commandModelByUsername['command'], $command))
+            {
+                $action = $commandModelByUsername['action'];
+                $minLevenshteinDistance = $commandModelByUsername['command'];
+            }
+        }
+
+        if($minLevenshteinDistance < 7)
+        {
+            return $this->getIftttTriggerByDevice($action);
+        }
+        return "no command";
+    }
     private function commandModelsAndDevicesToArray($commandModelsAndDevices)
     {
         $commandModelsAndDevicesToArray = [];

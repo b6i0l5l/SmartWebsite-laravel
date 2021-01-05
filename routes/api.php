@@ -23,6 +23,7 @@ Route::get('/getcommand/{action}','App\Http\Controllers\CommandsController@getCo
 Route::get('/getallcommands/{username}','App\Http\Controllers\CommandsController@getAllCommandsByUser');
 Route::get('/getdevicesinfos/{username}','App\Http\Controllers\CommandsController@getAllCommandModelsAndDevicesByUser');
 Route::get('/gettrigger/{action}','App\Http\Controllers\CommandsController@getIftttTriggerByDevice');
+Route::get('/gettrigger/levenshtein/{command}','App\Http\Controllers\CommandsController@getIftttTriggerByLevenshtein');
 Route::get('/getusercommand/{action}','App\Http\Controllers\CommandsController@deviceCommand');
 Route::get('check/useraccount','App\Http\Controllers\UsersController@checkUsernamePassword');
 Route::post('/postcommand','App\Http\Controllers\CommandsController@postCommand');
